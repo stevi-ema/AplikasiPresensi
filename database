@@ -1,0 +1,54 @@
+-- CREATE DB PRESENSI
+CREATE DATABASE presensi;
+
+GO
+
+USE presensi;
+
+GO
+
+--CREATE TABLE PENGGUNA
+CREATE TABLE pengguna (id VARCHAR(21) NOT NULL PRIMARY KEY, nama VARCHAR(50) NOT NULL, gender CHAR(1) NOT NULL DEFAULT 'L', 
+telp VARCHAR(15) NULL, password VARCHAR(50) NOT NULL);
+
+GO
+
+--INSERT PENGGUNA
+INSERT INTO pengguna VALUES ('190302581', 'Stevi Ema Wijayanti', 'P','081234561234','stevi12345');
+
+GO
+
+--CREATE TABLE SISWA
+CREATE TABLE siswa (nisn VARCHAR(10) NOT NULL PRIMARY KEY, nama VARCHAR(50) NOT NULL, jk CHAR(1) NOT NULL DEFAULT 'L', 
+tempatLahir VARCHAR(35) NOT NULL, tanggalLahir DATE NOT NULL, alamat VARCHAR(50) NULL, foto VARCHAR(20) NOT NULL,
+namaAyah VARCHAR(50) NOT NULL, namaIbu VARCHAR(50) NOT NULL, alamatOrtu VARCHAR(50) NULL, telp VARCHAR(15) NOT NULL);
+
+GO
+
+--INSERT TABLE SISWA
+INSERT INTO siswa VALUES ('0019293103', 'Imanda Retno Asih', 'P','Magelang','2001-10-18','Jl. Bumikarya No. 29 Sleman', '0019293103.jpg',
+'Susi Fajri', 'Darko Lesmana','Jl. Bumikarya No. 29 Sleman', '087856340912');
+INSERT INTO siswa VALUES ('0019230171', 'Firdaus Zaman', 'L','Sleman','2001-07-26','Perum Royal Indah Blok A no. 77 Sleman','0019230171.jpg',
+'Anisa Sari', 'Zakaria Hasan','Perum Royal Indah Blok A no. 77 Sleman', '081290347856');
+
+GO
+
+--CREATE TABLE PRESENSI
+CREATE TABLE presensi (id CHAR(10) NOT NULL PRIMARY KEY, tanggal DATE NOT NULL, jam TIME NOT NULL, 
+nisn VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES siswa(nisn), ket VARCHAR(35) NOT NULL);
+
+GO
+
+--INSERT TABEL PRESENSI
+INSERT INTO presensi VALUES ('211130-001','2021-11-30','06:20:33','0019293103', 'Tepat Waktu');
+INSERT INTO presensi VALUES ('211130-002','2021-11-30','06:50:37','0019230171','Tepat Waktu');
+INSERT INTO presensi VALUES ('211201-001','2021-12-1','06:35:33','0019293103', 'Tepat Waktu');
+INSERT INTO presensi VALUES ('211201-002','2021-12-1','07:05:10','0019230171','Terlambat');
+INSERT INTO presensi VALUES ('211202-001','2021-12-2','06:40:23','0019230171', 'Tepat Waktu');
+INSERT INTO presensi VALUES ('211202-002','2021-12-2','06:43:50','0019293103','Tepat Waktu');
+
+GO
+
+SELECT * FROM pengguna;
+SELECT * FROM siswa;
+SELECT * FROM presensi;
